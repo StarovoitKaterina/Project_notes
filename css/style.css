@@ -179,6 +179,13 @@ p {
     color: #000;
 }
 
+.notes-list{
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 10px;
+}
 .decor-notes {
     display: flex;
     align-items: center;
@@ -220,4 +227,18 @@ p {
     background: #fff;
     border: 2px solid blue;
     border-radius: 10px;
+}
+.notes-title{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #292515;
+}
+.notes-content{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.71429;
+    color: #000;
 }
