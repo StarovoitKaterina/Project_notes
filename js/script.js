@@ -99,6 +99,12 @@ const view = {
                 `
         }
         list.innerHTML = newNotes
+
+
+        const count = document.querySelector('.notes-counter')
+        let totalCount = notes.length
+        count.innerHTML = `${'Всего заметок:'} ${totalCount}`
+
     }
 }
 
