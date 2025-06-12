@@ -248,3 +248,18 @@ p {
     text-align: right;
     color: #000;
 }
+.filter-box{
+    width: 1152px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 8px;
+    margin: 24px 64px;
+
+}
+.my-favorite {
+    width: 254px;
+    height: 24px;
+}

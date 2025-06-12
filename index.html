@@ -13,10 +13,10 @@
 <body>
 
 <header class="header">
-    <div class = 'header-container'>
+    <div class='header-container'>
         <img src="images/Notes.svg" alt="" class="logo">
         <img src="images/notes2.svg" alt="" class="logo-main">
-        <span class ="notes-counter">Всего заметок:</span>
+        <span class="notes-counter">Всего заметок:</span>
     </div>
 </header>
 <main class="section">
@@ -62,14 +62,16 @@
             </div>
         </form>
     </div>
+    <div class="filter-box">
+        <label class="my-favorite">
+            <input type="checkbox" name="favorites" id="favorites">
+            Показать только избранные заметки
+        </label>
+    </div>
     <div>
         <p>У вас нет еще ни одной заметки</p>
         <p>Заполните поля выше и создайте свою первую заметку!</p>
     </div>
-    <div class="filter-box">
-        <!-- Ваш код -->
-    </div>
-
 
     <ul class="notes-list">
         <!-- Сюда будут рендерится заметки из JavaScript -->
