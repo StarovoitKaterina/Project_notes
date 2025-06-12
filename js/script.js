@@ -19,6 +19,7 @@ const MOCK_NOTES = [
 
 const model = {
     notes: MOCK_NOTES,
+    allNotes: MOCK_NOTES,
 
     addTask(title, task) {
         const tasks = {
@@ -28,21 +29,33 @@ const model = {
             isFavorite: false,
             color: colors.YELLOW,
         }
-        this.notes.push(tasks)
+        this.allNotes.push(tasks)
+        this.notes = this.allNotes
         view.renderNotes(this.notes)
     },
     deleteTask(notesID){
-        this.notes = this.notes.filter((note) =>note.id !== notesID)
+        this.allNotes = this.allNotes.filter((note) =>note.id !== notesID)
+        this.notes = this.allNotes
         view.renderNotes(this.notes)
     },
     isFavorite(notesID){
-        this.notes = this.notes.map((note)=> {
+        this.allNotes = this.allNotes.map((note)=> {
             if(note.id === notesID){
                 note.isFavorite = !note.isFavorite
             }
             return note
 
         })
+        this.notes = this.allNotes
+        view.renderNotes(this.notes)
+    },
+    showFavoritesOnly() {
+        this.notes = this.allNotes.filter(note => note.isFavorite)
+        view.renderNotes(this.notes)
+    },
+
+    showAllNotes() {
+        this.notes = this.allNotes
         view.renderNotes(this.notes)
     },
 }
@@ -77,12 +90,12 @@ const view = {
                 controller.isFavorite(notesID)
             }
         })
-
     },
-    renderNotes(notes) {
-        const list = document.querySelector('.notes-list') // находим элемент, где будут отображаться наши заметки
 
-        let newNotes = ''// создаем новый объект
+    renderNotes(notes) {
+        const list = document.querySelector('.notes-list')
+
+        let newNotes = ''
 
         for (let i = 0; i < notes.length; i++) {
             let task = notes[i]
@@ -100,10 +113,36 @@ const view = {
         }
         list.innerHTML = newNotes
 
-
         const count = document.querySelector('.notes-counter')
         let totalCount = notes.length
         count.innerHTML = `Всего заметок: ${totalCount}`
+
+        const filter = document.querySelector('.filter-box')
+        if(notes.length === 0){
+            filter.innerHTML=''
+        } else {
+            filter.innerHTML= `<label class="my-favorite">
+                <input type="checkbox" name="favorites" id="favorites">
+                    Показать только избранные заметки
+            </label>`
+        }
+
+        const fav = document.getElementById('favorites')
+        if(fav){
+            fav.addEventListener('change', function () {
+                controller.toggleFavoriteView(fav.checked)
+            })
+        }
+
+        const clear = document.querySelector('.null-notes')
+        if (notes.length > 0) {
+            clear.innerHTML = ''
+        } else {
+            clear.innerHTML = `
+        <p>У вас нет еще ни одной заметки</p>
+        <p>Заполните поля выше и создайте свою первую заметку!</p>
+    `
+        }
     }
 }
 
@@ -119,6 +158,13 @@ const controller = {
     isFavorite(notesID){
         model.isFavorite(notesID)
     },
+    toggleFavoriteView(showOnlyFavorites) {
+        if (showOnlyFavorites) {
+            model.showFavoritesOnly()
+        } else {
+            model.showAllNotes()
+        }
+    }
 }
 
 view.init()
