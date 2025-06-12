@@ -117,15 +117,15 @@ const view = {
         let totalCount = notes.length
         count.innerHTML = `Всего заметок: ${totalCount}`
 
-        const filter = document.querySelector('.filter-box')
-        if(notes.length === 0){
-            filter.innerHTML=''
-        } else {
-            filter.innerHTML= `<label class="my-favorite">
-                <input type="checkbox" name="favorites" id="favorites">
-                    Показать только избранные заметки
-            </label>`
-        }
+        // const filter = document.querySelector('.filter-box')
+        // if(notes.length === 0){
+        //     filter.innerHTML=''
+        // } else {
+        //     filter.innerHTML= `<label class="my-favorite">
+        //         <input type="checkbox" name="favorites" id="favorites">
+        //             Показать только избранные заметки
+        //     </label>`
+        // }
 
         const fav = document.getElementById('favorites')
         if(fav){
