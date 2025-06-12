@@ -72,6 +72,16 @@ const view = {
             event.preventDefault()
             const title = name.value
             const task = newNotes.value
+
+            if(title.length > 50){
+                view.displayMessage('Максимальная длина заголовка - 50 символов')
+                return
+            }
+
+            if(title===''||task===''){
+                view.displayMessage('Пожалуйста, заполните все поля')
+                return
+            }
             controller.addTask(title, task)
             name.value = ''
             newNotes.value = ''
@@ -80,7 +90,7 @@ const view = {
         list.addEventListener('click', function (event) {
             if (event.target.classList.contains('delete-button')) {
                 const notesID = +event.target.closest('li').id
-                controller.deleteTask(notesID)
+                    controller.deleteTask(notesID)
             }
         })
 
@@ -143,6 +153,15 @@ const view = {
         <p>Заполните поля выше и создайте свою первую заметку!</p>
     `
         }
+    },
+
+    displayMessage(message) {
+        const messageBox = document.querySelector('.messages-box')
+        messageBox.textContent = message
+
+        setTimeout(() => {
+            messageBox.innerHTML = ''
+        },3000)
     }
 }
 
@@ -150,10 +169,12 @@ const controller = {
     addTask(title, task) {
         if (title.trim() !== '' && task.trim() !== '') {
             model.addTask(title, task)
+            view.displayMessage('Заметка добавлена!')
         }
     },
     deleteTask(notesID) {
         model.deleteTask(notesID)
+        view.displayMessage('Заметка удалена')
     },
     isFavorite(notesID){
         model.isFavorite(notesID)
